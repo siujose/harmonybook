@@ -3,9 +3,12 @@ import 'package:cancionero_app/models/song.dart';
 import 'package:cancionero_app/screens/song_detail_screen.dart';
 import 'package:cancionero_app/services/supabase_service.dart';
 import 'package:cancionero_app/screens/add_song_screen.dart';
+import 'package:cancionero_app/screens/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.changeTheme});
+
+  final Function(bool) changeTheme;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -44,6 +47,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Harmony Book'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SettingsScreen(changeTheme: widget.changeTheme),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

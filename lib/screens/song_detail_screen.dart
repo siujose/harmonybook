@@ -75,7 +75,11 @@ class SongDetailScreenState extends State<SongDetailScreen> {
           TextSpan(
             text: '$word ',
             style: TextStyle(
-              color: isChordLine ? Colors.blue : Colors.black,
+              color: isChordLine
+                  ? Colors.blue
+                  : Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
             ),
           ),
         );
@@ -294,7 +298,11 @@ class SongDetailScreenState extends State<SongDetailScreen> {
             ),
             RichText(
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                 children: _parseLyricsAndChords(lyricsAndChordsTransposed),
               ),
             ),
